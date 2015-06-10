@@ -18,5 +18,6 @@
     "morgan": "~1.5.3",
     "serve-favicon": "~2.2.1",
     "express-partials": "0.3.0"
+
   }
 }
