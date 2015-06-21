@@ -3,3 +3,16 @@
     <tr><td><a href="quizes/<%= quizes[i].id %>"> <%= quizes[i].pregunta %></a></td></tr>
   <% }%>
 </table>
+
+<form method="get" action="/quizes">
+  <h4>Buscar Pregunta</h4>
+  <input type="text" name="search" value="Buscar">
+  <input type="submit" value="Enviar">
+</form>
+
+<table>
+  <p>Resultados para <%= search%></p>
+  <% var i; for (i=0; i < quizes.length; i++) { %>
+    <tr><td><a href="quizes/<%= quizes[i].id %>"> <%= quizes[i].pregunta %></a></td></tr>
+  <% }%>
+</table>
