@@ -1,0 +1,5 @@
+mkdir cert
+cd cert
+openssl genrsa -out quiz_nodejs-key.pem 2048
+openssl req -new -sha256 -key quiz_nodejs-key.pem -out quiz_nodejs-csr.pem
+openssl x509 -req -in quiz_nodejs-csr.pem -signkey quiz_nodejs-key.pem -out quiz_nodejs-cert.pem

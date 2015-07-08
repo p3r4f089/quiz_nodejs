@@ -7,6 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('quiz_nodejs:server');
 var http = require('http');
+var fs = require("fs");
+var https = require("https");
+
+var options = {
+    key: fs.readFileSync('certs/quiz_nodejs-key.pem').toString(),
+    cert: fs.readFileSync('certs/quiz_nodejs-cert.pem').toString()
+};
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +27,8 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -88,3 +97,8 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+var serverSecure = https.createServer(options, app);
+serverSecure.listen(8443, function() {
+  debug('Express server listening on port ' + server.address().port);
+});
