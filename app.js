@@ -32,6 +32,20 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
+  if (req.session.user){
+       if(req.session.tiempo && (((new Date()).getTime() - req.session.tiempo) > 120000 )){
+           delete req.session.user;
+           delete req.session.tiempo;
+           res.redirect('/login');
+       }else{
+           req.session.tiempo = (new Date()).getTime();
+       }
+   }   
+
+  next();
+});
+
+app.use(function(req, res, next){
   if (!req.path.match(/\/login|\/logout/)){
     req.session.redir = req.path;
   }
